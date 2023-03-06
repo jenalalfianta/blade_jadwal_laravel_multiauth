@@ -12,15 +12,15 @@ class RuangController extends Controller
     public function index(Request $request)
     {
         $filter = $request->query('filter');
-        
+
         if(!empty($filter)){
             $ruangs = Ruang::sortable()->where('ruangs.nama_ruang', 'like', '%'.$filter.'%')->orderBy('id','DESC')->paginate(5);
         }else{
-            $filter = '';
+            $filter = null;
             $ruangs = Ruang::sortable()->orderBy('id','DESC')->paginate(5);
         }
 
-        return view('admin.ruang.index', compact('ruangs', 'filter'));
+        return view('admin.ruang.index', compact('filter', 'ruangs'));
     }
 
     public function create()
@@ -35,16 +35,18 @@ class RuangController extends Controller
             'kode_ruang'        => 'required|unique:ruangs',
             'nama_ruang'        => 'required',
             'lantai_ruang'      => 'required',
+            'kapasitas'         => 'required|integer',
         ]);
 
         Ruang::create([
             'kode_ruang'        => ucfirst($request->kode_ruang),
             'nama_ruang'        => ucfirst($request->nama_ruang),
             'lantai_ruang'      => ucfirst($request->lantai_ruang),
+            'kapasitas'         => $request->kapasitas,
 
         ]);
         
-        return view('admin.ruang.index')->with('message','Ruang Berhasil Ditambahkan :)');
+        return redirect('admin/ruang')->with('message','Ruang Berhasil Ditambahkan :)');
 
     }
     
@@ -55,23 +57,26 @@ class RuangController extends Controller
 
     public function update(Request $request, Ruang $ruang)
     {
-        $request->validateWithBag('create',
+        $request->validateWithBag('update',
         [
             'nama_ruang'        => 'required',
-            'lantai_ruang'      => 'required'
+            'lantai_ruang'      => 'required',
+            'kapasitas'         => 'required|integer',
         ]);
 
         $ruang->update([
             'nama_ruang'        => $request->nama_ruang,
             'lantai_ruang'      => $request->lantai_ruang,
+            'kapasitas'         => $request->kapasitas,
         ]);
+
+        return redirect('admin/ruang')->with('message','Ruang Berhasil Diperbaharui :)');
         
-        return view('admin.ruang.index')->with('message','Ruang Berhasil Ditambahkan :)');
     }
     
     public function destroy(Ruang $ruang)
     {
         Ruang::find($ruang->id)->delete();
-        return view('admin.ruang.index')->with('message','Ruang Berhasil Dihapus :)');
+        return redirect('admin/ruang')->with('message','Ruang Berhasil Dihapus :)');
     }
 }

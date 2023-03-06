@@ -5,7 +5,7 @@
 <form class="float-right mt-[-34px]" method="GET">
     <div class="relative">
         <label class="inline-block">Filter</label>
-        <input value="{{$filter}}" type="text" 
+        <input value="" type="text" 
         class="inline-block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
         name="filter" 
         placeholder="Cari ruang.. (Enter)">
@@ -25,6 +25,9 @@
                 @sortablelink ('lantai_ruang', 'Lantai')
             </th>
             <th scope="col" class="px-6 py-3">
+                @sortablelink ('kapasitas', 'Kapasitas')
+            </th>
+            <th scope="col" class="px-6 py-3">
                 Action
             </th>
         </tr>
@@ -41,6 +44,7 @@
             <td class="px-6 py-4">{{ $ruang->kode_ruang }}</td>
             <td class="px-6 py-4">{{ $ruang->nama_ruang }}</td>
             <td class="px-6 py-4">{{ $ruang->lantai_ruang }}</td>
+            <td class="px-6 py-4">{{ $ruang->kapasitas }}</td>
             <td class="px-6 py-4">
                 <a href="{{ route('admin.ruang.edit', $ruang->id) }}" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-2 mr-1 mb-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Edit</a>
                 <form style="display:inline-block" action="{{ route('admin.ruang.update', $ruang->id) }}" method="POST">

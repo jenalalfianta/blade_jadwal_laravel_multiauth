@@ -13,7 +13,7 @@ class Ruang extends Model
 
     use Sortable;
 
-    protected $fillable = ['kode_ruang','nama_ruang','lantai_ruang'];
+    protected $fillable = ['kode_ruang','nama_ruang','lantai_ruang', 'kapasitas'];
 
-    public $sortable = ['kode_ruang','nama_ruang','lantai_ruang'];
+    public $sortable = ['kode_ruang','nama_ruang','lantai_ruang', 'kapasitas'];
 }

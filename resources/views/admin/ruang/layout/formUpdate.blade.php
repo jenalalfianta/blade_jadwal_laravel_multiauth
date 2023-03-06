@@ -27,7 +27,7 @@
         <div>
             <label for="nama_ruang" class="flex-grow block font-medium text-sm text-gray-700">Nama Ruang</label>
             <input name="nama_ruang" value="{{old('nama_ruang') != null ? old('nama_ruang') : $ruang->nama_ruang }}" id="nama_ruang" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Masukan nama ruang..">
-            <x-input-error :messages="$errors->create->get('nama_ruang')" />
+            <x-input-error :messages="$errors->update->get('nama_ruang')" />
         </div>
 
         <div>
@@ -35,13 +35,23 @@
             <select name="lantai_ruang" id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <option disabled selected>Pilih Lantai</option>
             @for ($i=1; $i<6; $i++)
-              <option {{old('lantai_ruang') == $i ? "selected" : ""}} {{$ruang->lantai == $i ? "selected" : ""}} value="{{ $ruang  }}">{{ $i }}</option>
+              @if (!empty(old('lantai_ruang')) && old('lantai_ruang') ==  $i)
+                <option selected value={{old('lantai_ruang')}}>{{old('lantai_ruang')}}</option>
+              @elseif ($ruang->lantai_ruang == $i)
+                <option selected value={{$ruang->lantai_ruang}}>{{$ruang->lantai_ruang}}</option>
+              @else
+                <option value={{$i}}>{{$i}}</option>
+              @endif
             @endfor
             </select>
-            <x-input-error :messages="$errors->create->get('lantai_ruang')" class="mt-2" />
+            <x-input-error :messages="$errors->update->get('lantai_ruang')" class="mt-2" />
         </div>
-   
+
+        <div>
+          <label for="kapasitas" class="flex-grow block font-medium text-sm text-gray-700">Kapasitas</label>
+          <input name="kapasitas" value="{{old('kapasitas') != null ? old('kapasitas') : $ruang->kapasitas }}" id="kapasitas" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Masukan kapasitas ruang..">
+          <x-input-error :messages="$errors->update->get('kapasitas')" />
+        </div>
         <button id="submitData" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Simpan Data</button>
-        {{-- <button type="" id="saveDate" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Simpan Data</button> --}}
     </form>
 </div>
