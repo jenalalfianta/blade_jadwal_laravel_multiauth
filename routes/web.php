@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\JadwalController;
 use App\Http\Controllers\Admin\RuangController;
+use App\Http\Controllers\Guest\GuestController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,11 +18,14 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+//guest route
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('guest.index');
 });
 
+Route::get('/index', [GuestController::class, 'index'])->name('guest.index');
+
+//user route
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -34,7 +38,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-
+//admin route
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
     Route::namespace('Auth')->middleware('guest:admin')->group(function(){
         //login route
@@ -58,9 +62,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
         Route::delete('ruang/{ruang}', [RuangController::class, 'destroy'])->name('ruang.destroy');
     });
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('profile', [AuthenticatedSessionController::class, 'edit'])->name('profile.edit');
     Route::post('logout',[AuthenticatedSessionController::class, 'destroy'])->name('logout');
-
-    
 
 });

@@ -46,7 +46,7 @@
             <td class="px-6 py-4">{{ $ruang->lantai_ruang }}</td>
             <td class="px-6 py-4">{{ $ruang->kapasitas }}</td>
             <td class="px-6 py-4">
-                <a href="{{ route('admin.ruang.edit', $ruang->id) }}" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-2 mr-1 mb-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Edit</a>
+                <a href="{{ route('admin.ruang.edit', $ruang->id) }}" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2.5 mr-1 mb-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Edit</a>
                 <form style="display:inline-block" action="{{ route('admin.ruang.update', $ruang->id) }}" method="POST">
                     @method('DELETE')
                     @csrf
