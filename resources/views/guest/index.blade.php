@@ -1,14 +1,24 @@
 <x-guest-layout>
 
     <div class="py-12">
-        <div class="mx-auto sm:px-6 lg:px-8">
+        <div class="mx-auto sm:px-6 lg:px-14">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <div id="calendar"></div>
+                <div class="p-6 text-gray-500">
+                    <div class="md:overflow-hidden overflow-scroll" id="calendar"></div>
                 </div>
             </div>
         </div>
     </div>
+{{--     
+    <section>
+        <div class="flex flex-col justify-center text-center items-center h-screen">
+            <h2 class="text-white text-2xl font-medium">Lorem Ipsum</h2>
+            <h1 class="md:text-5xl text-3xl text-white font-semibold py-5">
+                Lorem Ipsum Dengan Bahasa Indonesia
+            </h1>
+        </div>
+    </section> --}}
+    
 
     @push('scripts')
         <link href="{{asset('assets/css/fullcalendarcustom.css')}}" rel="stylesheet"/>
